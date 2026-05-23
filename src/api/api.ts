@@ -8,7 +8,7 @@ class API {
 
     //direccion
 
-    static ROOT = 'http://192.168.1.8:8000'
+    static ROOT = 'https://proyectotsw.onrender.com'
     static API_URL = '/colectas/api/'
     static API_VERSION = 'v1/'
     
