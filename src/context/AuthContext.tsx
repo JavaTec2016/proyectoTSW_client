@@ -56,14 +56,13 @@ export function AuthProvider({children}:{children:React.ReactNode}){
         setRole(null);
     }
 
-    useEffect(()=>{
-       API.access(accessToken)
-    }, [accessToken])
+    
     useEffect(()=>{
         const restoreSession = async() =>{
             try{
                 const res = await API.refresh();
                 setAccessToken(res.data.access);
+                API.access(res.data.access);
                 setUser(res.data.username);
                 setRole(res.data.rol)
                 startRefresh();
@@ -75,7 +74,9 @@ export function AuthProvider({children}:{children:React.ReactNode}){
         };
         restoreSession();
     }, [])
-
+    useEffect(()=>{
+       API.access(accessToken)
+    }, [accessToken])
     return (
         <AuthContext.Provider value={{user, role, accessToken, isLoading, login, logout}}>
             {children}
