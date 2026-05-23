@@ -31,10 +31,13 @@ function Sidebar({collapsed, layout=navItems}:{collapsed:boolean, layout?:SideSe
   return (
     <aside style={{width: '100%', height:'100%'}} className="sidebar">
         <div className="sidebar-header">
-            <div className="sidebar-icon">
-                <span className="navbar-toggler-icon"></span>
+            <div className="d-flex justify-content-between w-100">
+                <span style={{ color: '#fff', fontWeight: 500, whiteSpace: 'nowrap', fontSize:'20px' }} className="ms-4">Ajustes</span>
+                <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
-            <span style={{ color: '#fff', fontWeight: 500, whiteSpace: 'nowrap', fontSize:'20px' }} className="ms-4">Ajustes</span>
+            
+
+            
         </div>
 
         <nav>
