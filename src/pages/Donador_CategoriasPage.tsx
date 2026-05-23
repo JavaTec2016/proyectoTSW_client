@@ -122,7 +122,7 @@ export function Donador_CategoriasPage() {
         if (!API.accessToken) return;
         console.log('AUTH TOKEN: ', API.accessToken)
         getRegistros();
-    }, [API.accessToken])
+    }, [API.accessToken, accessToken])
 
 
     return (
