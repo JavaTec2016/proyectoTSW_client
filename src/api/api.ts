@@ -7,8 +7,9 @@ type paramsObject = {
 class API {
 
     //direccion
-
-    static ROOT = 'https://proyectotsw.onrender.com'
+    static __local = 'http://192.168.1.8:8000'
+    static __prod = 'https://proyectotsw.onrender.com'
+    static ROOT = this.__prod;
     static API_URL = '/colectas/api/'
     static API_VERSION = 'v1/'
     

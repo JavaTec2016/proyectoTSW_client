@@ -120,6 +120,7 @@ export function CorporacionesPage() {
     }
 
     useEffect(() => {
+        console.log('AAA: ', API.accessToken)
         if (!API.accessToken) return;
         console.log('AUTH TOKEN: ', API.accessToken)
         getRegistros();

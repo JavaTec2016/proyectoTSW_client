@@ -124,6 +124,7 @@ export function Donador_CategoriasPage() {
         getRegistros();
     }, [API.accessToken])
 
+
     return (
         <div className="app-shell">
             <ToastContainer />
