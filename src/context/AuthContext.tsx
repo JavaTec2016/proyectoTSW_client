@@ -27,8 +27,10 @@ export function AuthProvider({children}:{children:React.ReactNode}){
     const refreshAccessToken = async () =>{
         try{
             const res = await API.refresh();
+            console.log('refreesheado')
             setAccessToken(res.data.access)
             return res.data.access;
+            
         }catch(e){
             //logout();
         }
