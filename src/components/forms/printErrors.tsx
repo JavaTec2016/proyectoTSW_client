@@ -1,7 +1,6 @@
 import type { ErrorOption } from "react-hook-form";
 
 export function printErrors(error: ErrorOption) {
-    console.log(error)
     return (
         <div>
             {Object.keys(error.types!).map(type => (
@@ -9,4 +8,14 @@ export function printErrors(error: ErrorOption) {
             ))}
         </div>
     );
+}
+
+export function printCustomErrors(errors:string[]){
+    return (
+        <div>
+            {errors.map((text, idx) => (
+                <p key={idx} className="text-danger">{text}</p>
+            ))}
+        </div>
+    )
 }

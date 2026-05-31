@@ -31,7 +31,7 @@ export function Navigation({ brandContent, children, onSideToggle = () => { }, c
         </div>
       </Navbar>
       {includeSidebar && (
-        <div className="offcanvas offcanvas-start" tabIndex={-1} id="sidebar">
+        <div className="offcanvas offcanvas-start"  data-bs-scroll="true" tabIndex={-1} id="sidebar">
           <Sidebar collapsed={false}></Sidebar>
         </div>
       )}

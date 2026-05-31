@@ -4,7 +4,7 @@ import { inputName } from './FormActions'
 import type { ErrorOption, FieldErrors, FieldValues, RegisterOptions, UseFormRegister } from 'react-hook-form'
 import { printErrors } from './printErrors';
 
-function FormSelectField({formId, inputId, options, label, register, errors, validation, onInput}:{formId:string, inputId:string, options:{[x:string]:any}, label:string, register:UseFormRegister<FieldValues>, errors: FieldErrors<FieldValues>, validation:{ [x: string]: RegisterOptions }, onInput:()=>any}) {
+function FormSelectField({formId, inputId, options, label, register, validation, customErrors: customErrors, onInput}:{formId:string, inputId:string, options:{[x:string]:any}, label:string, register:UseFormRegister<FieldValues>, validation:{ [x: string]: RegisterOptions }, customErrors:React.ReactNode, onInput:()=>any}) {
     const id = inputName(formId, inputId);
   return (
     <div className="form-group">
@@ -14,7 +14,7 @@ function FormSelectField({formId, inputId, options, label, register, errors, val
                     <option value={optValue} key={optValue}>{options[optValue]}</option>
                 ))}
             </FormSelect>
-            {errors[id] && errors[id]!.types && printErrors(errors[id] as ErrorOption)}
+            {customErrors}
         </div>
   )
 }

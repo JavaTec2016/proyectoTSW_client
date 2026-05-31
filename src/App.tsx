@@ -12,6 +12,7 @@ import { AuthProvider } from './context/AuthContext';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './pages/Dashboard';
+import DonadoresPage from './pages/DonadoresPage';
 const router = createBrowserRouter([
   //rutas token
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
       {path:'categorias', element:<Donador_CategoriasPage />},
       {path:'corporaciones', element:<CorporacionesPage />},
       {path:'eventos', element:<EventosPage />},
+      {path:'donadores', element:<DonadoresPage />},
     ]
   },
   {

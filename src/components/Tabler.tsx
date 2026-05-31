@@ -15,9 +15,26 @@ import type {
 import { useEffect, useState } from "react";
 import TableHeader from "./TableHeader";
 import TableBodier from "./TableBodier";
-import { makeDatatableColumns } from "./forms/FormActions";
 import { makeColumns, type SlotConfigs } from "./TableActions";
-export function Tabler({ data, columns, columNames, primaryField, onDetail, onEdit, onDelete, onSearchToggle=()=>{}, headerData }: { data: { [x: string]: any }[], columns: string[], columNames: string[], primaryField: string, onDetail: (id: string) => any, onEdit: (id: string) => any, onDelete: (id: string) => any, onSearchToggle?:(state:boolean)=>any, headerData:{title:string, subtitle:string} }) {
+
+export type TablePresentation = {
+    title: string;
+    subtitle: string;
+}
+
+export type TablerAttributes = {
+    data: { [x: string]: any }[];
+    columns: string[], columNames: string[];
+    primaryField: string, onDetail: (id: string) => any;
+    onEdit: (id: string) => any;
+    onDelete: (id: string) => any;
+    onSearchToggle?: (state: boolean) => any;
+    headerData: TablePresentation;
+    editButtonAttributes?: {[x:string]:any};
+    detailButtonAttributes?: {[x:string]:any};
+    deleteButtonAttributes?: {[x:string]:any};
+}
+export function Tabler({ data, columns, columNames, primaryField, onDetail, onEdit, onDelete, onSearchToggle = () => { }, headerData, editButtonAttributes, detailButtonAttributes, deleteButtonAttributes }: TablerAttributes) {
     const [listing, setListing] = useState<{ [x: string]: any }[]>([])
     const [sorting, setSorting] = useState<SortingState>([]);
     async function load() {
@@ -27,15 +44,15 @@ export function Tabler({ data, columns, columNames, primaryField, onDetail, onEd
     useEffect(() => {
         load();
     }, [data])
-    
+
     //config acciones
     const slotConfig: SlotConfigs = {};
     const sortings: { [x: number]: boolean } = {};
     slotConfig[columns.length] = ({ row, getValue }) => (
         <>
-            <button onClick={(ev) => { onDelete(row.original[primaryField]) }} className="btn btn-danger mx-2 my-2">Eliminar</button>
-            <button onClick={(ev) => { onDetail(row.original[primaryField]) }} className="btn btn-info mx-2 my-2">Detalles</button>
-            <button onClick={(ev) => { onEdit(row.original[primaryField]) }} className="btn btn-warning mx-2 my-2">Modificar</button>
+            <button onClick={(ev) => { onDelete(row.original[primaryField]) }} className="btn btn-danger mx-2 my-2" {...deleteButtonAttributes}>Eliminar</button>
+            <button onClick={(ev) => { onDetail(row.original[primaryField]) }} className="btn btn-info mx-2 my-2" {...detailButtonAttributes}>Detalles</button>
+            <button onClick={(ev) => { onEdit(row.original[primaryField]) }} className="btn btn-warning mx-2 my-2" {...editButtonAttributes}>Modificar</button>
         </>
     )
     sortings[columns.length] = false;
@@ -57,8 +74,8 @@ export function Tabler({ data, columns, columNames, primaryField, onDetail, onEd
     })
     const { pageIndex } = table.getState().pagination;
 
-    useEffect(()=>{
-    },[])
+    useEffect(() => {
+    }, [])
 
     return (
         //arriba iria el filtro pero yo no lo descargo pq ya lo tengo
@@ -67,7 +84,7 @@ export function Tabler({ data, columns, columNames, primaryField, onDetail, onEd
                 <div className="d-flex justify-content-center align-items-center form-group">
                     <p className="panel-title pe-2">{headerData.title}</p>
                     <label htmlFor="paginationSelect" className="w-100 px-4">Registros por página:{" "}</label>
-                    <select className="form-control" name="paginationSelect" id="paginationSelect" onChange={(ev)=>{
+                    <select className="form-control" name="paginationSelect" id="paginationSelect" onChange={(ev) => {
                         table.setPageSize(parseInt(ev.target.value))
                     }}>
                         <option value={5}>5</option>
@@ -76,7 +93,7 @@ export function Tabler({ data, columns, columNames, primaryField, onDetail, onEd
                         <option value={50}>50</option>
                     </select>
                 </div>
-                
+
                 <div className="search-box">
                     <label htmlFor="toggleSearch">Busqueda automática</label>
                     <input type="checkbox" id='toggleSearch' name="toggleSearch" onInput={(e) => {

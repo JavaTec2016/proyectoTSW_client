@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react'
-
-function DetallerPanel({id, headerInfo, hidden=true, setHidden, children}:{headerInfo:{[x:string]:any, title:string, subtitle:string}, hidden?:boolean, setHidden:(a:boolean)=>any, children?:React.ReactNode, id?:string}) {
+export type DetallerPresentation = {
+  [x:string]:string | undefined;
+  title:string;
+  subtitle:string;
+  error?:string;
+}
+function DetallerPanel({id, headerInfo, hidden=true, setHidden, children}:{headerInfo:DetallerPresentation, hidden?:boolean, setHidden:(a:boolean)=>any, children?:React.ReactNode, id?:string}) {
   return (
     <div id={id} className='form-panel' style={{minWidth:'100%', maxHeight:'100vh'}} hidden={hidden}>
         <div className="panel-header d-flex justify-content-between">

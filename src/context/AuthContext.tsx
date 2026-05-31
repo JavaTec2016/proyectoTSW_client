@@ -1,12 +1,12 @@
 import { createContext, useState, useContext, useEffect, useRef } from "react";
 import API from "../api/api";
-
+type LoginCreds = {[x:string]:any, username:string, password:string, grecaptchatoken?:string}
 type LoginContext = {
     user:string | null,
     role:string | null,
     accessToken: string | null,
     isLoading: boolean,
-    login: (creds:{[x:string]:any, username:string, password:string}) => Promise<any>,
+    login: (creds:LoginCreds) => Promise<any>,
     logout: ()=> Promise<any>
 }
 const AuthContext = createContext<LoginContext | null>(null);
@@ -35,7 +35,7 @@ export function AuthProvider({children}:{children:React.ReactNode}){
             //logout();
         }
     }
-    const login = async(creds:{[x:string]:any, username:string, password:string}) => {
+    const login = async(creds:LoginCreds) => {
         const res = await API.login(creds);
         if(res.error) return res;
         setUser(creds.username);
