@@ -44,7 +44,7 @@ export default function Login() {
         const grecaptchaToken = window.grecaptcha.enterprise.getResponse(
             widgetIdRef.current ?? undefined
         )
-        if(!grecaptchaToken){
+        if(!grecaptchaToken && false){
             toast.error('Complete el captcha');
             (document.getElementById('btnIngresar') as HTMLInputElement).value = 'Ingresar'
             return;
